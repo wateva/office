@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Office
 {
     public class Firm
     {
-        static public string[] posiblePositions = new string[6]
+        static public Worker[] posiblePositions = new Worker[6]
         {
-            "programmer", "designer", "tester", "manager", "director", "booker"
+           new Booker(), new Director(), new Manager(), new Designer(), new Programmer(), 
+           new Tester()
         };
 
         static public Dictionary<string, int> paymentDepence = new Dictionary<string, int>()

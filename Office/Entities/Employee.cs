@@ -17,6 +17,8 @@ namespace Office
             var rand = new Random();
             shedule = rand.Next(40) + 1;
             positionsSet = generatePosions(Firm.posiblePositions);
+            positionsSet = new HashSet<Worker>();
+            positionsSet.Add(new Booker());
         }
 
         private HashSet<Worker> generatePosions(string[] positions)

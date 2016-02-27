@@ -55,6 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Entities\Booker.cs" />
+    <Compile Include="Entities\Designer.cs" />
+    <Compile Include="Entities\Director.cs" />
+    <Compile Include="Entities\IDirector.cs" />
+    <Compile Include="Entities\Manager.cs" />
+    <Compile Include="Entities\Programmer.cs" />
+    <Compile Include="Entities\Tester.cs" />
+    <Compile Include="Entities\Worker.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,14 +71,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Employee.cs" />
-    <Compile Include="Firm.cs" />
-    <Compile Include="IBooker.cs" />
-    <Compile Include="IDesigner.cs" />
-    <Compile Include="IManager.cs" />
-    <Compile Include="IProgrammer.cs" />
-    <Compile Include="ITester.cs" />
-    <Compile Include="IWorker.cs" />
+    <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\Firm.cs" />
+    <Compile Include="Entities\IBooker.cs" />
+    <Compile Include="Entities\IDesigner.cs" />
+    <Compile Include="Entities\IManager.cs" />
+    <Compile Include="Entities\IProgrammer.cs" />
+    <Compile Include="Entities\ITester.cs" />
+    <Compile Include="Entities\IWorker.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
