@@ -6,7 +6,7 @@ namespace Office
 {
     public class Employee
     {
-        private Set<Worker> positionsSet;
+        private HashSet<Worker> positionsSet;
         private int paymeent;
         private int earnedMoney;
         private bool isFixedPayment;
@@ -15,24 +15,23 @@ namespace Office
         public Employee()
         {
             var rand = new Random();
-            this.shedule = rand.Next(40) + 1;
-            this.positionsSet = generatePosions(Firm.posiblePositions);
+            shedule = rand.Next(40) + 1;
+            positionsSet = generatePosions(Firm.posiblePositions);
         }
 
-        private Set<Worker> generatePosions(string[] positions)
+        private HashSet<Worker> generatePosions(string[] positions)
         {
-            result = new ArrayList();
+            var rand = new Random();
+            var result = new HashSet<Worker>();
             int currentPos;
             int posCount = rand.Next(1, 7); //количество должностей сотрудника
 
             for (int i = 0; i < posCount; i++)
             {
-                while (result[i] == null)
-                {
-                    currentPos = rand.Next(6);
-                    if (this.result.Contains(positions[currentPos]) == false) // должности не должны повторяться
-                        this.result[i] = positions[currentPos];
-                }
+                currentPos = rand.Next(6);
+                if (result.Contains(positions[currentPos]) == false) // должности не должны повторяться
+                    result = positions[currentPos];
+
             }
             return result;
         }
