@@ -5,12 +5,12 @@ namespace Office
 {
     public class Firm
     {
-        public string[] posiblePositions = new string[6]
+        static public string[] posiblePositions = new string[6]
         {
             "programmer", "designer", "tester", "manager", "director", "booker"
         };
 
-        public Dictionary<string, int> paymentDepence = new Dictionary<string, int>()
+        static public Dictionary<string, int> paymentDepence = new Dictionary<string, int>()
         {
             {"programmer", 50},
             {"designer", 40},
