@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Office.Entities
 {
@@ -16,6 +17,7 @@ namespace Office.Entities
             var rand = new Random();
             shedule = rand.Next(40) + 1;
             positionsSet = generatePosions(Firm.posiblePositions);
+            isFixedPayment = positionsSet.Any(x => x is Director) || positionsSet.Any(x => x is Booker) || positionsSet.Any(x => x is Manager);
         }
 
         private HashSet<Worker> generatePosions(Worker[] positions)
