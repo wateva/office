@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
-namespace Office
+namespace Office.Entities
 {
     public class Employee
     {
@@ -17,23 +16,19 @@ namespace Office
             var rand = new Random();
             shedule = rand.Next(40) + 1;
             positionsSet = generatePosions(Firm.posiblePositions);
-            positionsSet = new HashSet<Worker>();
-            positionsSet.Add(new Booker());
         }
 
-        private HashSet<Worker> generatePosions(string[] positions)
+        private HashSet<Worker> generatePosions(Worker[] positions)
         {
             var rand = new Random();
             var result = new HashSet<Worker>();
-            int currentPos;
             int posCount = rand.Next(1, 7); //количество должностей сотрудника
 
             for (int i = 0; i < posCount; i++)
             {
-                currentPos = rand.Next(6);
+                var currentPos = rand.Next(6);
                 if (result.Contains(positions[currentPos]) == false) // должности не должны повторяться
-                    result = positions[currentPos];
-
+                    result.Add(positions[currentPos]);
             }
             return result;
         }
