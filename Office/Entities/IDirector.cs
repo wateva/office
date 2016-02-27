@@ -1,7 +1,7 @@
-﻿namespace Office
+﻿namespace Office.Entities
 {
-    public interface IDirector
+    public interface IDirector : IWorker
     {
-         
+        Worker forceToWork();
     }
 }

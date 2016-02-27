@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Office
+namespace Office.Entities
 {
     public class Booker : Worker, IBooker
     {
