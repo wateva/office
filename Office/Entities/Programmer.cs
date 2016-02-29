@@ -4,11 +4,13 @@ namespace Office.Entities
 {
     public class Programmer : Worker, IProgrammer
     {
-        const bool isFixedPayment = false;
-        const int moneyPerHour = 50;
+        public int payment = 50;
+        public bool isFixedPay = false;
+        public Worker RealWorker;
+
         public bool toWriteCode(int hours)
         {
             throw new NotImplementedException();
         }
-    }s
+    }
 }

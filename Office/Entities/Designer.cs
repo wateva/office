@@ -4,8 +4,10 @@ namespace Office.Entities
 {
     public class Designer : Worker, IDesigner
     {
-        const int moneyPerHour = 60;
-        const bool isFixedPayment = false;
+        public int payment = 35;
+        public bool isFixedPay = false;
+        public Worker RealWorker;
+
         public bool toDrawLayout(int hours)
         {
             throw  new NotImplementedException();

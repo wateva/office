@@ -4,9 +4,11 @@ namespace Office.Entities
 {
     public class Tester: Worker, ITester
     {
-        const bool isFixedPayment = false;
-        const int moneyPerHour = 40;
-        private bool toTestProgramm()
+        public int payment = 40;
+        public bool isFixedPay = false;
+        public Worker RealWorker;
+
+        public bool toTestProgramm(int hours)
         {
             throw new NotImplementedException();
         }

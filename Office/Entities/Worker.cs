@@ -1,12 +1,21 @@
-﻿namespace Office
+﻿using System;
+
+namespace Office
 {
     public class Worker : IWorker
     {
-        bool isFixedPayment;
-        private int RemainHoursToWork;
-        public int getRemaininghours {
-            private set { }
-            get { return RemainHoursToWork;}
+        public int hoursRemainToWork;
+        public int shedule;
+        public int earnedMoney;
+        public Worker RealWorker;
+
+        public Worker()
+        {
+            shedule = new Random().Next(1, 41);
+            hoursRemainToWork = 0;
+            earnedMoney = 0;
+            Worker RealWorker = null;
         }
+ 
     }
 }

@@ -2,7 +2,6 @@
 {
     public interface IDirector : IWorker
     {
-        int moneyPerMonth;
-        Worker forceToWork();
+        newTask forceToWork(Employee[] list, string[] posiblePositions);
     }
 }
