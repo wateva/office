@@ -4,9 +4,13 @@ namespace Office.Entities
 {
     public class Director : Worker, IDirector
     {
-        public Worker forceToWork() //события?
+        const int moneyPerMonth = 2200;
+        const bool isFixedPayment = true;
+        public Worker forceToWork(Worker[] positions) //события?
         {
-            throw new NotImplementedException();
+            var rand = new Random();
+            int curPos = rand.Next(5); //5 чтобы не заставлять директора работать
+            return positions[curPos];
         }
     }
 }
