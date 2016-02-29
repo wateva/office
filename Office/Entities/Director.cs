@@ -4,6 +4,7 @@ namespace Office.Entities
 {
     public class Director : Worker, IDirector
     {
+
         public int payment = 2500;
         public bool isFixedPay = true;
         public Worker RealWorker;

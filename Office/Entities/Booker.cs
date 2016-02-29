@@ -5,6 +5,7 @@ namespace Office.Entities
 {
     public class Booker : Worker, IBooker
     {
+
         public int payment = 2300;
         public bool isFixedPay = true;
         public Worker RealWorker;

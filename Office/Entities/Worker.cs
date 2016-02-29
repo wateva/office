@@ -16,6 +16,5 @@ namespace Office
             earnedMoney = 0;
             Worker RealWorker = null;
         }
- 
     }
 }

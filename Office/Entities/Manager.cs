@@ -8,6 +8,7 @@ namespace Office.Entities
         public bool isFixedPay = true;
         public Worker RealWorker;
 
+
         public bool toSellServices(int hours)
         {
             throw new NotImplementedException();
