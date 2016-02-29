@@ -4,6 +4,6 @@ namespace Office
 {
     public interface IWorker
     {
-        int getRemaininghours { get; }
+        //int getRemainingHours { get; }
     }
 }

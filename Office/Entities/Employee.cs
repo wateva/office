@@ -6,33 +6,43 @@ namespace Office.Entities
 {
     public class Employee
     {
-        private HashSet<Worker> positionsSet;
+        public HashSet<string> positionsSet;
         private int paymeent;
         private int earnedMoney;
+        private int timeSpent;
         private bool isFixedPayment;
         private int shedule;
 
         public Employee()
         {
+            timeSpent = 0;
             var rand = new Random();
-            shedule = rand.Next(40) + 1;
-            positionsSet = generatePosions(Firm.posiblePositions);
-            isFixedPayment = positionsSet.Any(x => x is Director) || positionsSet.Any(x => x is Booker) || positionsSet.Any(x => x is Manager);
-        }
+            shedule = rand.Next(40) + 1; //сгенерировать количетство часов в неделю
+            positionsSet = generatePosions(Firm.posiblePositions); //сгенерировать список должностьей работника
+            if (positionsSet.Contains("director") || positionsSet.Contains("manager") || positionsSet.Contains("booker"))
+            {
+                isFixedPayment = true;
+            }
+            else
+            {
+                isFixedPayment = false;
+            }
 
-        private HashSet<Worker> generatePosions(Worker[] positions)
+    }
+
+        private HashSet<string> generatePosions(string[] positions)
         {
             var rand = new Random();
-            var result = new HashSet<Worker>();
+            var resultSet = new HashSet<string>();
             int posCount = rand.Next(1, 7); //количество должностей сотрудника
 
             for (int i = 0; i < posCount; i++)
             {
                 var currentPos = rand.Next(6);
-                if (result.Contains(positions[currentPos]) == false) // должности не должны повторяться
-                    result.Add(positions[currentPos]);
+                if (resultSet.Contains(positions[currentPos]) == false) // должности не должны повторяться
+                    resultSet.Add(positions[currentPos]);
             }
-            return result;
+            return resultSet;
         }
     }
 }
