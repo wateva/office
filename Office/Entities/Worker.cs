@@ -2,9 +2,12 @@
 {
     public class Worker : IWorker
     {
-        bool isFixedPayment;
+        public bool isFixedPayment
+        {
+            get { return isFixedPayment; }
+        }
         private int RemainHoursToWork;
-        public int getRemaininghours {
+        public int getRemaininghours {s
             private set { }
             get { return RemainHoursToWork;}
         }
