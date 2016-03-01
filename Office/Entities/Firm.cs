@@ -9,34 +9,36 @@ namespace Office.Entities
 {
     public class Firm
     {
+        public int days;
         public Type[] posiblePositions =
         {
             typeof (Booker), typeof (Manager), typeof (Designer), typeof (Programmer), typeof (Tester),
             typeof (Director)
         };
-
+        public string[] reportArr;
         public HashSet<Worker> EmployeePositionsSet;
         public ArrayList EmployeeList;
 
         public Firm()
         {
+            reportArr = new string[4];
+            days = 0;
             EmployeeList = new ArrayList();
             EmployeePositionsSet = new HashSet<Worker>();
             generateEmployees();
             //checkForImportantPositions();
         }
 
-
         public void generateEmployees()
         {
             var rand = new Random((int)DateTime.Now.Ticks);
             for (int i = 0; i < rand.Next(10, 101); i++)
             {
-                var worker = new Worker();
+                var worker = new Worker(rand.Next(1, 41));
                 EmployeeList.Add(worker);
                 for (int j = 0; j < rand.Next(1, 5); j++)
                 {
-                    Worker specializedWorker = (Worker) Activator.CreateInstance(posiblePositions[rand.Next(6)], worker);
+                    Worker specializedWorker =  Activator.CreateInstance(posiblePositions[rand.Next(6)], worker) as Worker;
                     //specializedWorker.RealWorker = worker;
                     EmployeePositionsSet.Add(specializedWorker);
                 }
@@ -53,13 +55,23 @@ namespace Office.Entities
                 EmployeePositionsSet.Add(new Manager((Worker)EmployeeList[2]));
         }
 
-
-
         public void workflow()
         {
-            minusOneDay();
+            if (days == 30) days = 0;
+            minusOneDay(EmployeePositionsSet);
             ordersFromDirectors(EmployeePositionsSet);
-
+            days++;
+            if (days % 7 == 0)
+            {
+                foreach (var worker in EmployeePositionsSet.OfType<Director>())
+                    worker.RealWorker.earnedMoney += worker.payment;
+                foreach (var worker in EmployeePositionsSet.OfType<Manager>())
+                    worker.RealWorker.earnedMoney += worker.payment;
+                foreach (var worker in EmployeePositionsSet.OfType<Booker>())
+                    worker.RealWorker.earnedMoney += worker.payment;
+                
+                reportArr[days / 7 - 1] = Booker.CalculatePaymentsForAWeek(EmployeePositionsSet, EmployeeList);
+            }
         }
 
         public void ordersFromDirectors(HashSet<Worker> EmployeePositions)
@@ -70,28 +82,29 @@ namespace Office.Entities
                 for (int i = 0; i < task.howManyPeopleToWork;)
                 {
                     int startIter = i;
-                    if (director.giveTaskForBooker(EmployeePositions, task.howMuchTimeToWork)) i++;
-                    if (director.giveTaskForDesigner(EmployeePositions, task.howMuchTimeToWork)) i++;
-                    if (director.giveTaskForManager(EmployeePositions, task.howMuchTimeToWork)) i++;
-                    if (director.giveTaskForProgrammer(EmployeePositions, task.howMuchTimeToWork)) i++;
-                    if (director.giveTaskForTester(EmployeePositions, task.howMuchTimeToWork)) i++;
+                    if (i <= task.howManyPeopleToWork && director.giveTaskForBooker(EmployeePositions, task.howMuchTimeToWork)) i++;
+                    if (i <= task.howManyPeopleToWork && director.giveTaskForDesigner(EmployeePositions, task.howMuchTimeToWork)) i++;
+                    if (i <= task.howManyPeopleToWork && director.giveTaskForManager(EmployeePositions, task.howMuchTimeToWork)) i++;
+                    if (i <= task.howManyPeopleToWork && director.giveTaskForProgrammer(EmployeePositions, task.howMuchTimeToWork)) i++;
+                    if (i <= task.howManyPeopleToWork && director.giveTaskForTester(EmployeePositions, task.howMuchTimeToWork)) i++;
                     if (i==startIter) break; //на аутсорс
                 }
             }
         }
 
-        public void minusOneDay()
+        public void minusOneDay(HashSet<Worker> EmployeePositions)
         {
-            foreach (var worker in EmployeePositionsSet.Where(x => x.hoursRemainToWork != 0 && !(x is Director || x is Manager || x is Booker)))
+            Worker realWorker;
+            foreach (var worker in EmployeePositions.Where(x => x.hoursRemainToWork != 0))
             {
-                worker.hoursAlreadyWorked++;
-                worker.hoursRemainToWork--;
-                //worker.earnedMoney += (int)worker.GetType().GetProperty("payment").GetValue(worker);
-                worker.earnedMoney += (int)worker.GetType().GetField("payment").GetValue(worker);
+                realWorker = (Worker)worker.GetType().GetField("RealWorker").GetValue(worker);
+                realWorker.hoursAlreadyWorked++;
+                realWorker.hoursRemainToWork--;
+                //realWorker.earnedMoney += (int)worker.GetType().GetProperty("payment").GetValue(worker);
+                if(!(bool)worker.GetType().GetField("isFixedPay").GetValue(worker))
+                    realWorker.earnedMoney += (int)worker.GetType().GetField("payment").GetValue(worker);
             }
-        }
-
-        
+        }       
     }
 
     public struct newTask

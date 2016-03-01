@@ -9,6 +9,10 @@ namespace Office.Entities
         public int payment = 2500;
         public bool isFixedPay = true;
         public new Worker RealWorker;
+        private int hoursRemainToWork;
+        private int shedule;
+        private int earnedMoney;
+        private int hoursAlreadyWorked;
 
         public Director(Worker worker)
         {
@@ -32,9 +36,9 @@ namespace Office.Entities
             foreach (
                 var manager in
                     EmployeePositions.OfType<Manager>()
-                        .Where(manager => manager.hoursRemainToWork == 0 &&
-                                          manager.hoursAlreadyWorked + hours <=
-                                          manager.shedule))
+                        .Where(manager => manager.RealWorker.hoursRemainToWork == 0 &&
+                                          manager.RealWorker.hoursAlreadyWorked + hours <=
+                                          manager.RealWorker.shedule))
             {
                 manager.toSellServices(hours);
                 return true;
@@ -47,9 +51,9 @@ namespace Office.Entities
             foreach (
                 var designer in
                     EmployeePositions.OfType<Designer>()
-                        .Where(designer => designer.hoursRemainToWork == 0 &&
-                                           designer.hoursAlreadyWorked + hours <=
-                                           designer.shedule))
+                        .Where(designer => designer.RealWorker.hoursRemainToWork == 0 &&
+                                           designer.RealWorker.hoursAlreadyWorked + hours <=
+                                           designer.RealWorker.shedule))
             {
                 designer.toDrawLayout(hours);
                 return true;
@@ -77,9 +81,9 @@ namespace Office.Entities
             foreach (
                 var tester in
                     EmployeePositions.OfType<Tester>()
-                        .Where(tester => tester.hoursRemainToWork == 0 &&
-                                         tester.hoursAlreadyWorked + hours <=
-                                         tester.shedule))
+                        .Where(tester => tester.RealWorker.hoursRemainToWork == 0 &&
+                                         tester.RealWorker.hoursAlreadyWorked + hours <=
+                                         tester.RealWorker.shedule))
             {
                 tester.toTestProgramm(hours);
                 return true;
@@ -92,9 +96,9 @@ namespace Office.Entities
             foreach (
                 var programmer in
                     EmployeePositions.OfType<Programmer>()
-                        .Where(programmer => programmer.hoursRemainToWork == 0 &&
-                                             programmer.hoursAlreadyWorked + hours <=
-                                             programmer.shedule))
+                        .Where(programmer => programmer.RealWorker.hoursRemainToWork == 0 &&
+                                             programmer.RealWorker.hoursAlreadyWorked + hours <=
+                                             programmer.RealWorker.shedule))
             {
                 programmer.toWriteCode(hours);
                 return true;
