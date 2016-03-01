@@ -14,8 +14,8 @@ namespace Office.Entities
         {
             return new newTask()
             {
-                howMuchTimeToWork = new Random().Next(1, 3),
-                howManyPeopleToWork = new Random().Next(1, 20)
+                howMuchTimeToWork = new Random((int)DateTime.Now.Ticks).Next(1, 3),
+                howManyPeopleToWork = new Random((int)DateTime.Now.Ticks).Next(1, 20)
             };
         }
         //ниже идут функции для поиска свободного работника. среди всего множества работнков берется конкретная должность, далее выбираются те, 

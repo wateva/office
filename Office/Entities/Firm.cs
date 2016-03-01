@@ -20,6 +20,8 @@ namespace Office.Entities
 
         public Firm()
         {
+            EmployeeList = new ArrayList();
+            EmployeePositionsSet = new HashSet<Worker>();
             generateEmployees();
             checkForImportantPositions();
         }
@@ -27,7 +29,7 @@ namespace Office.Entities
 
         public void generateEmployees()
         {
-            var rand = new Random();
+            var rand = new Random((int)DateTime.Now.Ticks);
             for (int i = 0; i < rand.Next(10, 101); i++)
             {
                 var worker = new Worker();
@@ -64,6 +66,8 @@ namespace Office.Entities
 
         public void workflow()
         {
+            minusOneDay();
+            ordersFromDirectors(EmployeePositionsSet);
 
         }
 
@@ -85,7 +89,15 @@ namespace Office.Entities
             }
         }
 
-        
+        public void minusOneDay()
+        {
+            foreach (var worker in EmployeePositionsSet.Where(x => x.RealWorker.hoursRemainToWork != 0))
+            {
+                worker.RealWorker.hoursAlreadyWorked++;
+                worker.RealWorker.hoursRemainToWork--;
+                //worker.earnedMoney += worker.
+            }
+        }
 
         
     }

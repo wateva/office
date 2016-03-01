@@ -8,11 +8,11 @@ namespace Office
         public int shedule;
         public int earnedMoney;
         public int hoursAlreadyWorked;
-        private Worker RealWorker;
+        public Worker RealWorker;
 
         public Worker()
         {
-            shedule = new Random().Next(1, 41);
+            shedule = new Random((int)DateTime.Now.Ticks).Next(1, 41);
             hoursRemainToWork = 0;
             earnedMoney = 0;
             Worker RealWorker = null;

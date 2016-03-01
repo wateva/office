@@ -4,6 +4,6 @@ namespace Office.Entities
 {
     public interface IDirector : IWorker
     {
-        newTask forceToWork(Type[] posiblePositions);
+        newTask forceToWork();
     }
 }

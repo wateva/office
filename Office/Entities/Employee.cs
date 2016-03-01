@@ -32,7 +32,7 @@ namespace Office.Entities
 
         private HashSet<string> generatePosions(string[] positions)
         {
-            var rand = new Random();
+            var rand = new Random((int)DateTime.Now.Ticks);
             var resultSet = new HashSet<string>();
             int posCount = rand.Next(1, 7); //количество должностей сотрудника
 

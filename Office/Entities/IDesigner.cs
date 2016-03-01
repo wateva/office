@@ -5,6 +5,6 @@ namespace Office
 {   
     public interface IDesigner : IWorker
     { 
-        bool toDrawMaket(int hours);
+        bool toDrawLayout(int hours);
     }
 }
