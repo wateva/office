@@ -23,7 +23,7 @@ namespace Office.Entities
             EmployeeList = new ArrayList();
             EmployeePositionsSet = new HashSet<Worker>();
             generateEmployees();
-            checkForImportantPositions();
+            //checkForImportantPositions();
         }
 
 
@@ -36,9 +36,9 @@ namespace Office.Entities
                 EmployeeList.Add(worker);
                 for (int j = 0; j < rand.Next(1, 5); j++)
                 {
-                    Worker specWorker = (Worker) Activator.CreateInstance(posiblePositions[rand.Next(6)]);
-                    specWorker.RealWorker = worker;
-                    EmployeePositionsSet.Add(specWorker);
+                    Worker specializedWorker = (Worker) Activator.CreateInstance(posiblePositions[rand.Next(6)], worker);
+                    //specializedWorker.RealWorker = worker;
+                    EmployeePositionsSet.Add(specializedWorker);
                 }
             }
         }
@@ -46,20 +46,11 @@ namespace Office.Entities
         public void checkForImportantPositions()
         {
             if (!EmployeePositionsSet.OfType<Director>().Any())
-                EmployeePositionsSet.Add(new Director
-                {
-                    RealWorker = (Worker) EmployeeList[0]
-                });
+                EmployeePositionsSet.Add(new Director((Worker) EmployeeList[0]));
             if (!EmployeePositionsSet.OfType<Booker>().Any())
-                EmployeePositionsSet.Add(new Booker
-                {
-                    RealWorker = (Worker) EmployeeList[0]
-                });
+                EmployeePositionsSet.Add(new Booker((Worker) EmployeeList[1]));
             if (!EmployeePositionsSet.OfType<Manager>().Any())
-                EmployeePositionsSet.Add(new Manager
-                {
-                    RealWorker = (Worker) EmployeeList[0]
-                });
+                EmployeePositionsSet.Add(new Manager((Worker)EmployeeList[2]));
         }
 
 
@@ -91,11 +82,12 @@ namespace Office.Entities
 
         public void minusOneDay()
         {
-            foreach (var worker in EmployeePositionsSet.Where(x => x.RealWorker.hoursRemainToWork != 0))
+            foreach (var worker in EmployeePositionsSet.Where(x => x.hoursRemainToWork != 0 && !(x is Director || x is Manager || x is Booker)))
             {
-                worker.RealWorker.hoursAlreadyWorked++;
-                worker.RealWorker.hoursRemainToWork--;
-                //worker.earnedMoney += worker.
+                worker.hoursAlreadyWorked++;
+                worker.hoursRemainToWork--;
+                //worker.earnedMoney += (int)worker.GetType().GetProperty("payment").GetValue(worker);
+                worker.earnedMoney += (int)worker.GetType().GetField("payment").GetValue(worker);
             }
         }
 

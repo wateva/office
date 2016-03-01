@@ -8,14 +8,20 @@ namespace Office.Entities
 
         public int payment = 2300;
         public bool isFixedPay = true;
-        public Worker RealWorker;
+        public new Worker RealWorker;
 
-        public  bool toMakeReport(int hours)
+        public Booker(Worker worker)
         {
-            throw new NotImplementedException();
+            RealWorker = worker;
         }
 
-        public Dictionary<Employee, int> toCalculatePayments()
+        public bool toMakeReport(int hours)
+        {
+            hoursRemainToWork = hours;
+            return true;
+        }
+
+        public Dictionary<Worker, int> toCalculatePayments()
         {
             throw new NotImplementedException();
         }

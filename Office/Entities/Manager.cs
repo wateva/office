@@ -8,10 +8,15 @@ namespace Office.Entities
         public bool isFixedPay = true;
         public Worker RealWorker;
 
+        public Manager(Worker worker)
+        {
+            RealWorker = worker;
+        }
 
         public bool toSellServices(int hours)
         {
-            throw new NotImplementedException();
+            RealWorker.hoursRemainToWork = hours;
+            return true;
         }
     }
 }

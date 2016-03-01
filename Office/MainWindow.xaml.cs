@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Office.Entities;
 
 namespace Office
 {
@@ -23,6 +24,12 @@ namespace Office
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            Firm firm = new Firm();
+            firm.workflow();
         }
     }
 }

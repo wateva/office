@@ -6,11 +6,17 @@ namespace Office.Entities
     {
         public int payment = 40;
         public bool isFixedPay = false;
-        public Worker RealWorker;
+        public new Worker RealWorker;
+
+        public Tester(Worker worker)
+        {
+            RealWorker = worker;
+        }
 
         public bool toTestProgramm(int hours)
         {
-            throw new NotImplementedException();
+            RealWorker.hoursRemainToWork = hours;
+            return true;
         }
     }
 }

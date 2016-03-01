@@ -6,11 +6,16 @@ namespace Office.Entities
     {
         public int payment = 50;
         public bool isFixedPay = false;
-        public Worker RealWorker;
+        public new Worker RealWorker;
 
+        public Programmer(Worker worker)
+        {
+            RealWorker = worker;
+        }
         public bool toWriteCode(int hours)
         {
-            throw new NotImplementedException();
+            RealWorker.hoursRemainToWork = hours;
+            return true;
         }
     }
 }
