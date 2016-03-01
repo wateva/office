@@ -7,7 +7,8 @@ namespace Office
         public int hoursRemainToWork;
         public int shedule;
         public int earnedMoney;
-        public Worker RealWorker;
+        public int hoursAlreadyWorked;
+        private Worker RealWorker;
 
         public Worker()
         {

@@ -1,7 +1,9 @@
-﻿namespace Office.Entities
+﻿using System;
+
+namespace Office.Entities
 {
     public interface IDirector : IWorker
     {
-        newTask forceToWork(Employee[] list, string[] posiblePositions);
+        newTask forceToWork(Type[] posiblePositions);
     }
 }
