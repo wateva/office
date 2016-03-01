@@ -21,15 +21,27 @@ namespace Office
     /// </summary>
     public partial class MainWindow : Window
     {
+        Firm firm;
         public MainWindow()
         {
             InitializeComponent();
+            firm = new Firm();
+            
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void oneStepButton_Click(object sender, RoutedEventArgs e)
         {
-            Firm firm = new Firm();
             firm.workflow();
+        }
+
+        private void oneWeekButton_Click(object sender, RoutedEventArgs e)
+        {
+            int j, i = firm.days;
+            while (i - 7 > 7) i -= 7;
+            i = 7 - i;
+            for (j = 0; j < i; j++)
+                firm.workflow();
+            textBlock.Text = firm.reportArr[0];
         }
     }
 }
